@@ -65,7 +65,7 @@
       </div>
       <div class="container footer-pro-bottom">
         <span>© <span id="current-year-footer">${new Date().getFullYear()}</span> Infinity Serralheria. Todos os direitos reservados.</span>
-        <a href="https://xgreat.com.br" target="_blank" rel="noopener noreferrer">Projeto digital por XGR</a>
+        <a href="https://xgreat.com.br" target="_blank" rel="noopener noreferrer">Projeto digital por XGREAT</a>
       </div>`;
 
     const footerStyle = document.createElement('style');
