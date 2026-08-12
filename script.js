@@ -74,7 +74,9 @@
     window.addEventListener('scroll', toggleBackToTop, { passive: true });
     toggleBackToTop();
 
-    backToTop.addEventListener('click', () => {
+    backToTop.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
@@ -139,7 +141,7 @@
     });
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  document.querySelectorAll('a[href^="#"]:not(.back-to-top)').forEach((link) => {
     link.addEventListener('click', (event) => {
       const targetId = link.getAttribute('href');
       if (!targetId || targetId === '#') return;
