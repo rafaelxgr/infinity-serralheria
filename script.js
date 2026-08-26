@@ -134,21 +134,99 @@
     lightbox.addEventListener('cancel', () => { body.classList.remove('lightbox-open'); lightboxImage.src = ''; });
   }
 
-  if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const video = entry.target;
-        const source = video.querySelector('source[data-src]');
-        if (source && !source.src) { source.src = source.dataset.src || ''; video.load(); }
-        observer.unobserve(video);
+  // Destaques em vídeo: trechos curtos em loop, sem áudio e apenas quando estão visíveis.
+  // Mantém os dois vídeos restantes com controles normais para não transformar a página em um festival de autoplay.
+  const loopClips = {
+    'mov9.mp4': { start: 2, end: 11, poster: 'assets/portao1.jpg' },
+    'mov17.mp4': { start: 42, end: 56, poster: 'assets/N1.jpeg' },
+    'mov15.mp4': { start: 2, end: 13, poster: 'assets/N2.jpeg' },
+    'mov8.mp4': { start: 6, end: 18, poster: 'assets/portao5.jpg' }
+  };
+
+  const videoMeta = new Map();
+
+  videos.forEach((video) => {
+    const source = video.querySelector('source[data-src]');
+    if (!source) return;
+
+    // Corrige os dois caminhos antigos que ainda apontavam para a raiz do domínio.
+    const originalPath = source.dataset.src || '';
+    if (/^\/mov\d+\.mp4$/i.test(originalPath)) {
+      source.dataset.src = `assets/${originalPath.slice(1)}`;
+    }
+
+    const fileName = (source.dataset.src || '').split('/').pop();
+    const clip = fileName ? loopClips[fileName] : null;
+
+    if (clip) {
+      video.classList.add('video-loop-highlight');
+      video.controls = false;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('aria-live', 'off');
+      if (!video.getAttribute('poster') && clip.poster) video.poster = clip.poster;
+
+      video.addEventListener('timeupdate', () => {
+        if (video.currentTime >= clip.end) {
+          video.currentTime = clip.start;
+          video.play().catch(() => {});
+        }
       });
-    }, { rootMargin: '220px 0px' });
+
+      video.addEventListener('ended', () => {
+        video.currentTime = clip.start;
+        video.play().catch(() => {});
+      });
+    }
+
+    videoMeta.set(video, { source, clip });
+  });
+
+  const loadVideo = (video, shouldPlay = false) => {
+    const meta = videoMeta.get(video);
+    if (!meta) return;
+    const { source, clip } = meta;
+
+    const startPlayback = () => {
+      if (!clip || !shouldPlay) return;
+      if (video.currentTime < clip.start || video.currentTime >= clip.end) {
+        video.currentTime = clip.start;
+      }
+      video.play().catch(() => {});
+    };
+
+    if (source && !source.src) {
+      source.src = source.dataset.src || '';
+      video.addEventListener('loadedmetadata', startPlayback, { once: true });
+      video.load();
+    } else {
+      startPlayback();
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const meta = videoMeta.get(video);
+        if (!meta) return;
+
+        if (entry.isIntersecting) {
+          loadVideo(video, Boolean(meta.clip));
+        } else if (meta.clip) {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '180px 0px', threshold: 0.35 });
+
     videos.forEach((video) => videoObserver.observe(video));
   } else {
     videos.forEach((video) => {
-      const source = video.querySelector('source[data-src]');
-      if (source) { source.src = source.dataset.src || ''; video.load(); }
+      const meta = videoMeta.get(video);
+      loadVideo(video, Boolean(meta?.clip));
     });
   }
 
