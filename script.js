@@ -1,6 +1,22 @@
 (() => {
   'use strict';
 
+  // Google Ads - tag principal da Infinity Serralheria
+  // Carregada uma única vez e injetada no <head> pelo script principal do site.
+  if (!window.__infinityGoogleAdsLoaded) {
+    window.__infinityGoogleAdsLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', 'AW-17864146896');
+
+    const googleAdsScript = document.createElement('script');
+    googleAdsScript.async = true;
+    googleAdsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17864146896';
+    document.head.appendChild(googleAdsScript);
+  }
+
   const finishingStyles = document.createElement('link');
   finishingStyles.rel = 'stylesheet';
   finishingStyles.href = 'finishing.css?v=1';
