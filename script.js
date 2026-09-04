@@ -17,6 +17,20 @@
     document.head.appendChild(googleAdsScript);
   }
 
+  // Google Ads - conversão criada para contato/orçamento via WhatsApp.
+  // Qualquer clique em um link oficial de WhatsApp da Infinity dispara a conversão.
+  if (!window.__infinityGoogleAdsConversionBound) {
+    window.__infinityGoogleAdsConversionBound = true;
+    document.addEventListener('click', (event) => {
+      const whatsappLink = event.target.closest('a[href*="wa.me/5511966321556"]');
+      if (!whatsappLink || typeof window.gtag !== 'function') return;
+
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-17864146896/7wDPCObAOe4CEND_pMZC'
+      });
+    });
+  }
+
   const finishingStyles = document.createElement('link');
   finishingStyles.rel = 'stylesheet';
   finishingStyles.href = 'finishing.css?v=1';
