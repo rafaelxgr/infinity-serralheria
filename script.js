@@ -17,17 +17,31 @@
     document.head.appendChild(googleAdsScript);
   }
 
-  // Google Ads - conversão criada para contato/orçamento via WhatsApp.
-  // Qualquer clique em um link oficial de WhatsApp da Infinity dispara a conversão.
+  // Google Ads - conversão de contato/orçamento via WhatsApp.
+  // Usa o snippet oficial de clique e o rótulo correto da ação "Solicitar cotação (1)".
+  const gtagReportConversion = (url) => {
+    const callback = () => {
+      if (typeof url !== 'undefined') {
+        window.location = url;
+      }
+    };
+
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-17864146896/ky9RCLuQtPMcEND_pMZC',
+      event_callback: callback
+    });
+
+    return false;
+  };
+
   if (!window.__infinityGoogleAdsConversionBound) {
     window.__infinityGoogleAdsConversionBound = true;
     document.addEventListener('click', (event) => {
       const whatsappLink = event.target.closest('a[href*="wa.me/5511966321556"]');
       if (!whatsappLink || typeof window.gtag !== 'function') return;
 
-      window.gtag('event', 'conversion', {
-        send_to: 'AW-17864146896/7wDPCObAOe4CEND_pMZC'
-      });
+      event.preventDefault();
+      gtagReportConversion(whatsappLink.href);
     });
   }
 
