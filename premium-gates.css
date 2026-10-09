@@ -122,6 +122,19 @@
   line-height: 1.15;
 }
 
+/* Navegação desktop mais ampla */
+@media (min-width: 1041px) {
+  .site-header .header-inner {
+    width: min(calc(100% - 56px), 1320px);
+    max-width: 1320px;
+    gap: 34px;
+  }
+
+  .main-nav {
+    gap: 32px;
+  }
+}
+
 /* Refinamento leve dos componentes existentes, sem mudar a estrutura finalizada. */
 .service-card,
 .project-item,
@@ -147,7 +160,7 @@
   .hero-inner {
     background:
       linear-gradient(180deg, rgba(4,14,22,.16), rgba(4,14,22,.96) 72%),
-      url("assets/6.jpeg") center center / cover no-repeat !important;
+      url("assets/Fachadamoderna.png") center center / cover no-repeat !important;
   }
 
   .trust-strip {
