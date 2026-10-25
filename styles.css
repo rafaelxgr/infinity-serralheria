@@ -109,14 +109,12 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
 .brand-grid li { display: flex; align-items: center; justify-content: center; height: 45px; }
 .brand-grid img { width: auto; max-width: 100%; height: auto; max-height: 40px; object-fit: contain; }
 .brands-strip { border-block: 1px solid var(--line); background: #0d202c; }
-.brands-inner { display: flex; align-items: center; gap: 30px; min-height: 116px; }
-.brands-inner h2 { flex-shrink: 0; font-size: .77rem; line-height: 1.5; font-weight: 650; letter-spacing: .03em; color: #c2d2de; }
-.brands-window { min-width: 0; flex: 1; overflow: hidden; padding: 15px 0; background: #fff; border-radius: 6px; }
-.brands-track { display: flex; width: max-content; animation: brands-flow 28s linear infinite; }
-.brands-group { display: flex; align-items: center; gap: 70px; padding-right: 70px; }
-.brands-group img { width: auto; height: auto; max-height: 40px; max-width: 115px; object-fit: contain; }
-.brands-track.is-paused,.brands-window:hover .brands-track,.brands-window:focus-within .brands-track { animation-play-state: paused; }
-.brands-pause { min-width: 64px; min-height: 44px; padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: #cfdee7; font-size: .75rem; }
+.brands-inner { padding-block: 10px; }
+.brands-window { min-width: 0; overflow: hidden; padding: 6px 0; background: #fff; border-radius: 6px; }
+.brands-track { display: flex; width: max-content; animation: brands-flow 36s linear infinite; }
+.brands-group { display: flex; flex: 0 0 auto; align-items: center; gap: 128px; padding-right: 128px; }
+.brands-group img { width: auto; height: auto; max-height: 24px; max-width: 88px; object-fit: contain; }
+.brands-window:hover .brands-track,.brands-window:focus-within .brands-track { animation-play-state: paused; }
 @keyframes brands-flow { to { transform: translateX(-33.333333%); } }
 /* Maintenance keeps a deliberate illustration until the client supplies a photograph. */
 .maintenance { background: #0b1e2b; }
@@ -259,7 +257,7 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
  .btn-header { display: none; }
  .main-nav { top: 70px; }
  .hero-inner.container { min-height: 680px; align-items: flex-end; background: #040d14; }
- .hero-inner::before { content: ''; position: absolute; inset: 0 0 auto; height: 330px; background: linear-gradient(180deg,rgba(4,13,20,.04) 30%,#040d14 100%),url('assets/hero-portao.webp') 50% 52%/cover no-repeat; }
+ .hero-inner::before { content: ''; position: absolute; inset: 0 0 auto; height: 330px; background: linear-gradient(180deg,rgba(4,13,20,.04) 30%,#040d14 100%),url('assets/Fachadamoderna.png') 50% 52%/cover no-repeat; }
  .hero-content { width: 100%; margin: 0; padding: 245px 18px 40px; }
  .hero-kicker { max-width: 32ch; font-size: .65rem; }
  .hero h1 { font-size: clamp(3rem,13vw,4.5rem); margin-bottom: 20px; }
@@ -289,13 +287,9 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
  .automation-image img { aspect-ratio: 4/3; }
  .brand-grid { gap: 17px; padding: 16px; }
  .brand-grid img { max-height: 34px; }
- .brands-inner { min-height: 140px; gap: 14px; flex-wrap: wrap; padding-block: 20px; }
- .brands-inner h2 { flex: 1; }
- .brands-inner h2 br { display: none; }
- .brands-window { flex-basis: 100%; order: 3; }
- .brands-group { gap: 50px; padding-right: 50px; }
- .brands-group img { max-width: 105px; max-height: 32px; }
- .brands-pause { min-height: 44px; }
+ .brands-inner { padding-block: 8px; }
+ .brands-group { gap: 88px; padding-right: 88px; }
+ .brands-group img { max-width: 82px; max-height: 22px; }
  .project-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .project-item { aspect-ratio: 3/4; }
  .project-item span { left: 12px; bottom: 12px; right: 8px; font-size: .8rem; }
@@ -327,7 +321,6 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
 @media (prefers-reduced-motion: reduce) {
  html { scroll-behavior: auto; }
  *,*::before,*::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
- .brands-pause { display: none; }
  .brands-track { width: 100%; }
  .brands-group { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); justify-items: center; gap: 12px; width: 100%; padding: 0 16px; }
  .brands-group img { max-width: 100%; }

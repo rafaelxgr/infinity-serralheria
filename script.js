@@ -44,15 +44,6 @@
   const videos = document.querySelectorAll('video');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const motionBehavior = () => reducedMotion.matches ? 'auto' : 'smooth';
-  const brandsPause = document.querySelector('.brands-pause');
-  brandsPause?.addEventListener('click', () => {
-    const paused = brandsPause.getAttribute('aria-pressed') !== 'true';
-    brandsPause.setAttribute('aria-pressed', String(paused));
-    brandsPause.setAttribute('aria-label', paused ? 'Retomar movimento das marcas' : 'Pausar movimento das marcas');
-    brandsPause.textContent = paused ? 'Retomar' : 'Pausar';
-    document.querySelector('.brands-track')?.classList.toggle('is-paused', paused);
-  });
-
   if (year) year.textContent = String(new Date().getFullYear());
 
   const closeMenu = () => {
