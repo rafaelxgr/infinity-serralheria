@@ -95,6 +95,16 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
 .text-link { display: inline-flex; align-items: center; gap: 14px; margin-top: 16px; color: var(--cyan); font-size: .9rem; font-weight: 700; }
 .text-link:hover { text-decoration: underline; text-underline-offset: 5px; }
 .catalog-body .text-link { margin-top: 7px; font-size: .85rem; }
+.catalog-more { margin-top: 32px; }
+.catalog-toggle { display: flex; width: fit-content; margin-inline: auto; cursor: pointer; list-style: none; }
+.catalog-toggle::-webkit-details-marker { display: none; }
+.catalog-toggle::after { content: ''; width: 7px; height: 7px; margin: 0 2px 4px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.catalog-more[open] > .catalog-toggle::after { margin: 4px 2px 0; transform: rotate(225deg); }
+.catalog-toggle-less,.catalog-more[open] > .catalog-toggle .catalog-toggle-more { display: none; }
+.catalog-more[open] > .catalog-toggle .catalog-toggle-less { display: inline; }
+.catalog-more > .catalog-grid { margin-top: 24px; }
+.catalog-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); text-align: center; }
+.catalog-cta p { color: var(--muted); font-size: .93rem; }
 /* Automatization and manufacturer marks */
 .automation-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,6vw,100px); align-items: center; }
 .automation-image { overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); }
@@ -275,7 +285,7 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
  .service-body p { font-size: .93rem; margin-bottom: 22px; }
  .service-link { font-size: .88rem; }
  .catalog-grid { gap: 25px 14px; }
- .catalog-photo > span { bottom: 8px; right: 8px; padding: 5px 7px; font-size: .65rem; }
+ .catalog-photo > .model-code { top: 8px; left: 8px; padding: 5px 7px; }
  .catalog-body .text-link { gap: 6px; font-size: .75rem; }
  .section-note { font-size: .8rem; }
  .automation-layout,.maintenance-layout { grid-template-columns: 1fr; gap: 30px; }
@@ -305,9 +315,6 @@ h2 { color: white; font-size: clamp(2rem,3.3vw,3.35rem); line-height: 1.13; font
  .footer-pro-bottom { align-items: flex-start; flex-direction: column; gap: 10px; padding-bottom: 90px; }
  .floating-whatsapp { right: 14px; bottom: 14px; width: 54px; height: 54px; }
  .back-to-top { bottom: 18px; }
-}
-@media (max-width: 560px) {
- .catalog-grid { grid-template-columns: minmax(0,1fr); }
 }
 @media (max-width: 390px) {
  .hero-actions { grid-template-columns: 1fr; }
